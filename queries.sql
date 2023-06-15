@@ -113,3 +113,69 @@ JOIN animals a ON o.id = a.owner_id
 GROUP BY o.full_name
 ORDER BY animal_count DESC
 LIMIT 1;
+
+
+--Vet clinic database: add "join table" for visits exercise:
+SELECT a.name AS animal_name
+FROM animals a
+INNER JOIN visits v ON a.id = v.animal_id
+INNER JOIN vets ve ON ve.id = v.vet_id
+WHERE ve.name = 'William Tatcher'
+ORDER BY v.visit_date DESC
+LIMIT 1;
+
+SELECT COUNT(DISTINCT v.animal_id) AS num_animals
+FROM visits v
+INNER JOIN vets ve ON ve.id = v.vet_id
+WHERE ve.name = 'Stephanie Mendez';
+
+SELECT v.name AS vet_name, s.name AS specialty_name
+FROM vets v
+LEFT JOIN specializations sp ON v.id = sp.vet_id
+LEFT JOIN species s ON sp.species_id = s.id;
+
+SELECT a.name AS animal_name
+FROM animals a
+INNER JOIN visits v ON a.id = v.animal_id
+INNER JOIN vets ve ON ve.id = v.vet_id
+WHERE ve.name = 'Stephanie Mendez'
+  AND v.visit_date BETWEEN '2020-04-01' AND '2020-08-30';
+
+SELECT a.name AS animal_name, COUNT(v.animal_id) AS visit_count
+FROM animals a
+INNER JOIN visits v ON a.id = v.animal_id
+GROUP BY a.name
+ORDER BY visit_count DESC
+LIMIT 1;
+
+SELECT a.name AS animal_name, v.visit_date
+FROM animals a
+INNER JOIN visits v ON a.id = v.animal_id
+INNER JOIN vets ve ON ve.id = v.vet_id
+WHERE ve.name = 'Maisy Smith'
+ORDER BY v.visit_date ASC
+LIMIT 1;
+
+SELECT a.name AS animal_name, v.visit_date, ve.name AS vet_name
+FROM animals a
+INNER JOIN visits v ON a.id = v.animal_id
+INNER JOIN vets ve ON ve.id = v.vet_id
+ORDER BY v.visit_date DESC
+LIMIT 1;
+
+SELECT COUNT(*) AS num_visits
+FROM visits v
+INNER JOIN vets ve ON ve.id = v.vet_id
+INNER JOIN specializations s ON ve.id = s.vet_id
+INNER JOIN species sp ON sp.id = s.species_id
+WHERE sp.id != v.animal_id;
+
+SELECT a.species_id, COUNT(*) AS visit_count, sp.name AS species_name
+FROM visits v
+INNER JOIN vets ve ON ve.id = v.vet_id
+INNER JOIN animals a ON a.id = v.animal_id
+INNER JOIN species sp ON sp.id = a.species_id
+WHERE ve.name = 'Maisy Smith'
+GROUP BY a.species_id, sp.name
+ORDER BY visit_count DESC
+LIMIT 1;
