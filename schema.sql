@@ -1,14 +1,5 @@
 /* Database schema to keep the structure of entire database. */
 
-CREATE TABLE ANIMALS(
-   ID INT PRIMARY KEY NOT NULL,
-   NAME TEXT NOT NULL,
-   DATE_OF_BIRTH DATE NOT NULL,
-   ESCAPE_ATTEMPTS INT NOT NULL,
-   NEUTERED BOOLEAN,
-   WEIGHT_KG DECIMAL,
-   SPECIES VARCHAR(255)
-);
 CREATE TABLE ANIMALS (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
@@ -29,4 +20,28 @@ CREATE TABLE owners (
 CREATE TABLE species (
     id SERIAL PRIMARY KEY,
     name VARCHAR
+);
+
+CREATE TABLE vets (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR,
+    age INT,
+    date_of_graduatioin DATE
+);
+
+CREATE TABLE specializations (
+    vet_id INT, 
+    species_id INT,
+    FOREIGN KEY (vet_id) REFERENCES vets(id),
+    FOREIGN KEY (species_id) REFERENCES species(id),
+    CONSTRAINT pk_vet_species PRIMARY KEY (vet_id, species_id)
+);
+
+CREATE TABLE visits (
+    id SERIAL PRIMARY KEY,
+    animal_id INT, 
+    vet_id INT,
+    visit_date DATE,
+    FOREIGN KEY (vet_id) REFERENCES vets(id),
+    FOREIGN KEY (animal_id) REFERENCES animals(id)
 );
