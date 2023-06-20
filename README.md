@@ -96,6 +96,11 @@ Example commands:
 - Twitter: [@the_wayword1](https://twitter.com/the_wayword1)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/boluwatife-adegboyega/)
 
+## 👥 Author <a name="authors">Jesus Molina</a>
+
+- GitHub: [@Sparktan24](https://github.com/Sparktan24)
+- Twitter: [@Sparktan1](https://twitter.com/Sparktan1)
+- LinkedIn: [Jesus Molina](https://www.linkedin.com/in/jesus-molina-2b104424a/)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
